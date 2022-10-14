@@ -2,12 +2,20 @@
 Крестики нолики v1.0
 
 '''
+<<<<<<< HEAD
+# список карты игры
+=======
 # массив карты игры
+>>>>>>> 2894a84bbe85ac78ca14ecc5a2c3e64db4028974
 game_map = [[1,2,3],
             [4,5,6],
             [7,8,9]]
 
+<<<<<<< HEAD
+# список выигрышных вариантов
+=======
 # набор выигрышных вариантов
+>>>>>>> 2894a84bbe85ac78ca14ecc5a2c3e64db4028974
 win_opt = [[1,2,3],
            [4,5,6],
            [7,8,9],
@@ -19,9 +27,13 @@ win_opt = [[1,2,3],
 
 # функция вывода карты на экран
 def show_map():
+<<<<<<< HEAD
+    print('\n' + '+---'*3 + '+')
+=======
     print()
     print('+---'*3 + '+')
 
+>>>>>>> 2894a84bbe85ac78ca14ecc5a2c3e64db4028974
     for i in range(3):
         for j in range(3):
             print( '| ' + str(game_map[i][j]), end = ' ')
@@ -66,6 +78,37 @@ def main():
             else:
                 znak = 'O'
                 step = int(input('Игрок O, ваш ход: '))
+<<<<<<< HEAD
+        
+            if step >0 and step < 10:
+                if next_step(step, znak):
+                    player1 = not(player1)
+                else:
+                    print('Ячека занята, повторите ввод')
+            else:
+                print('Введенное число вне диапазона игрового поля')
+
+        except ValueError:
+            print('Введено не верное значение. Повторите ввод.')
+
+        win = get_result() # проверяем победителя
+        if win != '':
+            game_over = True
+
+    show_map()
+    print('Игра окончена. Выиграл игрок ' + win)
+
+
+
+
+
+        
+##for i in range(3):
+##    for j in range(3):
+##        n = game_map[i][j]
+##        print(int(-1 * n //3 * -1 - 1), end = ' ')
+##        print((n-1)%3)
+=======
         
             if step >0 and step < 10:
                 if next_step(step, znak):
@@ -95,6 +138,7 @@ for i in range(3):
         n = game_map[i][j]
         print(int(-1 * n //3 * -1 - 1), end = ' ')
         print((n-1)%3)
+>>>>>>> 2894a84bbe85ac78ca14ecc5a2c3e64db4028974
         
 if __name__ == '__main__':
     main()
