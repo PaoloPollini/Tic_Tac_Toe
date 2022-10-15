@@ -42,6 +42,11 @@ def next_step(step, znak):
 # функция проверяет текущий результат игры
 def get_result():
     win = ''
+    # собираем списки во множество и если в нем ХО - ничья
+    draw = set.union(set(game_map[0]),set(game_map[1]),set(game_map[2]))
+    if draw == 2:
+        win = 'Ничья'
+    # проверяем выигрышные комбинации
     for s0,s1,s2 in win_opt:
         if game_map[-1 * s0 //3 * -1 - 1][(s0-1)%3] ==\
            game_map[-1 * s1 //3 * -1 - 1][(s1-1)%3] ==\
@@ -81,7 +86,7 @@ def main():
             game_over = True
 
     show_map()
-    print('Игра оконена. Выиграл игрок ' + win)
+    print('Игра оконена. Выиграл игрок: ' + win)
 
 
 
