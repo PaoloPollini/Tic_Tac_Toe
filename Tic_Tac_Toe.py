@@ -1,6 +1,11 @@
 '''
-Крестики нолики v1.0
+    Крестики нолики v1.0
 
+    (c)saigon 2022
+    Written: Oct 16 2022.
+    Last Updated: Oct 16 2022
+    GitHub: https://github.com/PaoloPollini/Tic_Tac_Toe
+    
 '''
 # массив карты игры
 game_map = [[1,2,3],
@@ -26,7 +31,7 @@ def show_map():
         print('|\n' + '+---'*3 + '+')
 
 
-# функция делает ход в ячейку массива
+# функция делает ход в ячейку списка
 # проверив, не занята ли ячейка
 def next_step(step, znak):
     row = -1 * step //3 * -1 - 1                # вычисляем номер строки
@@ -54,8 +59,59 @@ def get_result():
             win = game_map[-1 * s0 //3 * -1 - 1][(s0-1)%3]
     return win
 
+# поиск шага с подсчетом Х и О в линиях выигрышных вариантов
+def find_step(num_X,num_O):
+    step = ''
+    for line in win_opt:
+        x = 0
+        o = 0
+        for s in line:
+            if game_map[-1 * s //3 * -1 - 1][(s-1)%3] == 'X':
+                x = x + 1
+            if game_map[-1 * s //3 * -1 - 1][(s-1)%3] == 'O':
+                o = x + 1
+        if x == num_X and o == num_O:
+            for s in line:
+                if game_map[-1 * s //3 * -1 - 1][(s-1)%3] != 'X' and\
+                   game_map[-1 * s //3 * -1 - 1][(s-1)%3] != 'O':
+                    step = game_map[-1 * s //3 * -1 - 1][(s-1)%3]
+
+    return step
 
 
+# выбор хода компьютером
+def computer_step():
+    step = ''
+
+    # 1- если два нолика и пусто - делаем ход и выигрываем
+    step = find_step(0,2)
+
+    # 2- если два крестика и пусто - ставим нолик, блокируем противника
+    if step == '':
+        step = find_step(2,0)
+
+    # 3- если один нолик и пусто - ставим нолик
+    if step == '':
+        step = find_step(0,1)
+
+    # 4- если центр не занят - ставим нолик
+    if step == '':
+        if game_map[1][1] not in ('X', 'O'):
+            step = 5
+
+    # 5- если занят центр - занимаем первую ячейку 
+    if step == '':
+        if game_map[0][0] not in ('X', 'O'):
+            step = 1
+
+    # 6- если один крестик и пусто - ставим нолик (наметилась ничья)
+    if step == '':
+        step = find_step(1,0)
+
+    return step
+
+
+# основная функция программы
 def main():
     game_over = False
     player1 = True
@@ -68,7 +124,9 @@ def main():
                 step = int(input('Игрок X, ваш ход: '))
             else:
                 znak = 'O'
-                step = int(input('Игрок O, ваш ход: '))
+                #step = int(input('Игрок O, ваш ход: '))
+                step = computer_step()
+                print("Компьютер делает ход: " + str(step))
         
             if step >0 and step < 10:
                 if next_step(step, znak):
