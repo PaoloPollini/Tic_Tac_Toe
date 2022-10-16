@@ -44,7 +44,7 @@ def get_result():
     win = ''
     # собираем списки во множество и если в нем ХО - ничья
     draw = set.union(set(game_map[0]),set(game_map[1]),set(game_map[2]))
-    if draw == 2:
+    if len(draw) == 2:
         win = 'Ничья'
     # проверяем выигрышные комбинации
     for s0,s1,s2 in win_opt:
@@ -90,14 +90,5 @@ def main():
 
 
 
-
-
-        
-for i in range(3):
-    for j in range(3):
-        n = game_map[i][j]
-        print(int(-1 * n //3 * -1 - 1), end = ' ')
-        print((n-1)%3)
-        
 if __name__ == '__main__':
     main()
