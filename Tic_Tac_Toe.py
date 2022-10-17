@@ -1,9 +1,10 @@
+
 '''
-    Крестики нолики v1.0
+    Крестики нолики v1.1
 
     (c)saigon 2022
     Written: Oct 16 2022.
-    Last Updated: Oct 16 2022
+    Last Updated: Oct 17 2022
     GitHub: https://github.com/PaoloPollini/Tic_Tac_Toe
     
 '''
@@ -50,7 +51,7 @@ def get_result():
     # собираем списки во множество и если в нем ХО - ничья
     draw = set.union(set(game_map[0]),set(game_map[1]),set(game_map[2]))
     if len(draw) == 2:
-        win = 'Ничья'
+        win = 'N'
     # проверяем выигрышные комбинации
     for s0,s1,s2 in win_opt:
         if game_map[-1 * s0 //3 * -1 - 1][(s0-1)%3] ==\
@@ -69,12 +70,12 @@ def find_step(num_X,num_O):
             if game_map[-1 * s //3 * -1 - 1][(s-1)%3] == 'X':
                 x = x + 1
             if game_map[-1 * s //3 * -1 - 1][(s-1)%3] == 'O':
-                o = x + 1
+                o = o + 1
         if x == num_X and o == num_O:
-            for s in line:
-                if game_map[-1 * s //3 * -1 - 1][(s-1)%3] != 'X' and\
-                   game_map[-1 * s //3 * -1 - 1][(s-1)%3] != 'O':
-                    step = game_map[-1 * s //3 * -1 - 1][(s-1)%3]
+            for t in line:
+                if game_map[-1 * t //3 * -1 - 1][(t-1)%3] != 'X' and\
+                   game_map[-1 * t //3 * -1 - 1][(t-1)%3] != 'O':
+                    step = game_map[-1 * t //3 * -1 - 1][(t-1)%3]
 
     return step
 
@@ -115,7 +116,7 @@ def computer_step():
 def main():
     game_over = False
     player1 = True
-    
+    win_dict = {'N':'Ничья!', 'X':'Выиграли крестики!', 'O':'Выиграли нолики!'}
     while game_over == False:
         show_map()
         try:
@@ -144,8 +145,8 @@ def main():
             game_over = True
 
     show_map()
-    print('Игра оконена. Выиграл игрок: ' + win)
-
+    print('Игра окончена. ' + win_dict[win])
+    input()
 
 
 if __name__ == '__main__':
