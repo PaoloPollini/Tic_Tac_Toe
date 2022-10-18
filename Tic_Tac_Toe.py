@@ -1,10 +1,9 @@
-
 '''
-    Крестики нолики v1.1
+    Крестики нолики v1.2
 
     (c)saigon 2022
     Written: Oct 16 2022.
-    Last Updated: Oct 17 2022
+    Last Updated: Oct 18 2022
     GitHub: https://github.com/PaoloPollini/Tic_Tac_Toe
     
 '''
@@ -71,10 +70,9 @@ def find_step(num_X,num_O):
                 x = x + 1
             if game_map[-1 * s //3 * -1 - 1][(s-1)%3] == 'O':
                 o = o + 1
-        if x == num_X and o == num_O:
+        if x == num_X and o == num_O and step == '':
             for t in line:
-                if game_map[-1 * t //3 * -1 - 1][(t-1)%3] != 'X' and\
-                   game_map[-1 * t //3 * -1 - 1][(t-1)%3] != 'O':
+                if game_map[-1 * t //3 * -1 - 1][(t-1)%3] not in ('X', 'O'):
                     step = game_map[-1 * t //3 * -1 - 1][(t-1)%3]
 
     return step
